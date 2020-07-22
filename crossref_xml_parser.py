@@ -103,7 +103,7 @@ def _prepare_data_for_xml_parsing(year, journal_volume, issue_number, title, fir
          ('journal_article',OrderedDict(
                                         [('@publication_type','full_text'),
                                          ('titles',{'title':title.replace("&", "&amp;")}), # convert ampersand since "&" breaks xml
-                                         ('contributors',contributors),
+                                         ('contributors',_parse_contributors(contributors)),
                                          ('publication_date',OrderedDict([('@media_type','print'),('year',article_publication_date)])),
                                          ('pages',OrderedDict([('first_page',first_page),('last_page',last_page)]) ),
                                          ('doi_data',article_doi)]) )
@@ -113,7 +113,7 @@ def _prepare_data_for_xml_parsing(year, journal_volume, issue_number, title, fir
     return  OrderedDict([('head',head),
                          ('body',body)])
 
-def generate_crossref_xml(year, journal_volume, issue_number, title, first_page, last_page, article_doi, doi_batch_id=None, language='en',output_file_name='temporary.xml'):
+def generate_crossref_xml(year, journal_volume, issue_number, title, first_page, last_page, article_doi,contributors=None, doi_batch_id=None, language='en',output_file_name='temporary.xml'):
     '''Creates a crossref valid XML based on the args on passed to this function. Writes to a file by name of output_file_name, defaults to "temporary.xml"'''
     # check that constants have been updated from their default value
     if any([DOI_PREFIX == '99.9999',
@@ -123,10 +123,10 @@ def generate_crossref_xml(year, journal_volume, issue_number, title, first_page,
             DEPOSITOR_NAME == 'John Doe',
             EMAIL == 'email@example.com']):
 
-        print("One or more values are still set to their default values. The parser will produce correctly formatted XML but"
+        print("One or more values are still set to their default values. The parser will produce correctly formatted XML but "
               "your submission will be rejected by crossref. Update constants in constants.py")
 
-    parseable_dict = _prepare_data_for_xml_parsing(year, journal_volume, issue_number, title, first_page, last_page, article_doi, doi_batch_id=None, language='en')
+    parseable_dict = _prepare_data_for_xml_parsing(year, journal_volume, issue_number, title, first_page, last_page, article_doi,contributors, doi_batch_id=None, language='en')
     xml = _parse_dict_to_xml(parseable_dict)
 
     with open(output_file_name,'w') as f:
