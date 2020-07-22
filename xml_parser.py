@@ -4,8 +4,8 @@ from bs4 import BeautifulSoup
 from collections import OrderedDict
 import time
 
-from constants import JOURNAL_TITLE,ABBREV_TITLE,ISSN,EMAIL,DEPOSITOR_NAME,DOI_PREFIX
-from constants import DOI_DEPOSIT_URL,DOI_BATCH_START,DOI_BATCH_END,VALIDATE_XML_URL
+from .constants import JOURNAL_TITLE,ABBREV_TITLE,ISSN,EMAIL,DEPOSITOR_NAME,DOI_PREFIX
+from .constants import DOI_DEPOSIT_URL,DOI_BATCH_START,DOI_BATCH_END,VALIDATE_XML_URL
 
 # Internal methods
 def _parse_contributors(authors, fill_empty_with_placeholders=False):
