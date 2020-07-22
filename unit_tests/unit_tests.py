@@ -1,4 +1,6 @@
-from crossref_xml_parser import validate_xml,generate_crossref_xml
+'''Very primitive unit-tests. '''
+
+from xml_parser import validate_xml,generate_crossref_xml
 
 # test validate xml method
 assert validate_xml('correct_xml.xml') is True

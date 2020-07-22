@@ -7,6 +7,7 @@ import time
 from constants import JOURNAL_TITLE,ABBREV_TITLE,ISSN,EMAIL,DEPOSITOR_NAME,DOI_PREFIX
 from constants import DOI_DEPOSIT_URL,DOI_BATCH_START,DOI_BATCH_END,VALIDATE_XML_URL
 
+# Internal methods
 def _parse_contributors(authors, fill_empty_with_placeholders=False):
     '''Parses a an a list of authors, the first author is gets the status of first, subsequent ones get "additional"
     If fill_empty_with_placeholders is True it a placeholder author will be filled in if an empty list of authors is passed'''
@@ -82,7 +83,7 @@ def _prepare_data_for_xml_parsing(year, journal_volume, issue_number, title, fir
 
     # meta info
     if doi_batch_id is None:
-        doi_batch_id = '{}_{}'.format(ABBREV_TITLE,str(time.time()).split('.')[0])
+        doi_batch_id = '{}'.format(str(time.time()).split('.')[0])
     if contributors is None:
         contributors = []
 
@@ -112,6 +113,8 @@ def _prepare_data_for_xml_parsing(year, journal_volume, issue_number, title, fir
 
     return  OrderedDict([('head',head),
                          ('body',body)])
+
+# Main Methods
 
 def generate_crossref_xml(year, journal_volume, issue_number, title, first_page, last_page, article_doi,contributors=None, doi_batch_id=None, language='en',output_file_name='temporary.xml'):
     '''Creates a crossref valid XML based on the args on passed to this function. Writes to a file by name of output_file_name, defaults to "temporary.xml"'''
@@ -161,9 +164,3 @@ def submit_doi_by_http(login,password,xml_file_path='temporary.xml',headers=None
 
     resp = requests.post(url=DOI_DEPOSIT_URL, data=data, headers=headers, files=files)
     return resp
-
-
-if __name__ == '__main__':
-
-    generate_crossref_xml('1986','1','2','Why is Python so sexy',12,24,123445)
-    print(validate_xml('temporary.xml'))
