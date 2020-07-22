@@ -78,7 +78,7 @@ def _parse_dict_to_xml(d):
     xml = "".join([DOI_BATCH_START, xml, DOI_BATCH_END])
     return xml
 
-def _prepare_data_for_xml_parsing(year, journal_volume, issue_number, title, first_page, last_page, article_doi,contributors=None, doi_batch_id=None, language='en'):
+def _prepare_data_for_xml_parsing(year, journal_volume, issue_number, title, first_page, last_page, article_doi,media_type='print',publication_type='full_text',contributors=None, doi_batch_id=None, language='en'):
     '''Takes the args and combines them into a dictionary structure that can be read by the XML parser'''
 
     # meta info
@@ -102,10 +102,10 @@ def _prepare_data_for_xml_parsing(year, journal_volume, issue_number, title, fir
          ('journal_metadata',OrderedDict([('@language',language),('full_title',JOURNAL_TITLE),('abbrev_title',ABBREV_TITLE),('issn',ISSN)]) ),
          ('journal_issue',OrderedDict(  [('publication_date',{'year':year}),('journal_volume',{'volume':journal_volume}),('issue',issue_number)])),
          ('journal_article',OrderedDict(
-                                        [('@publication_type','full_text'),
+                                        [('@publication_type',publication_type),
                                          ('titles',{'title':title.replace("&", "&amp;")}), # convert ampersand since "&" breaks xml
                                          ('contributors',_parse_contributors(contributors)),
-                                         ('publication_date',OrderedDict([('@media_type','print'),('year',article_publication_date)])),
+                                         ('publication_date',OrderedDict([('@media_type',media_type),('year',article_publication_date)])),
                                          ('pages',OrderedDict([('first_page',first_page),('last_page',last_page)]) ),
                                          ('doi_data',article_doi)]) )
          ]))])
