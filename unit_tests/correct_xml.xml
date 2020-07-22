@@ -1,0 +1,53 @@
+<doi_batch xmlns="http://www.crossref.org/schema/4.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           version="4.4.0"
+           xsi:schemaLocation="http://www.crossref.org/schema/4.4.0 http://www.crossref.org/schemas/crossref4.4.0.xsd">
+    <head>
+        <doi_batch_id>QQ_1595267311</doi_batch_id>
+        <timestamp>1595267311</timestamp>
+        <depositor>
+            <depositor_name>John Doe</depositor_name>
+            <email_address>email@example.com</email_address>
+        </depositor>
+        <registrant>Crossref</registrant>
+    </head>
+    <body>
+        <journal>
+            <journal_metadata language="en">
+                <full_title>Academia Journal</full_title>
+                <abbrev_title>QQ</abbrev_title>
+                <issn>999999</issn>
+            </journal_metadata>
+            <journal_issue>
+                <publication_date>
+                    <year>1984</year>
+                </publication_date>
+                <journal_volume>
+                    <volume>1</volume>
+                </journal_volume>
+                <issue>1</issue>
+            </journal_issue>
+            <journal_article publication_type="full_text">
+                <titles>
+                    <title>Academic Paper title</title>
+                </titles>
+                <contributors>
+                    <person_name sequence="first" contributor_role="author">
+                        <given_name>John</given_name>
+                        <surname>Doe</surname>
+                    </person_name>
+                </contributors>
+                <publication_date media_type="print">
+                    <year>1984</year>
+                </publication_date>
+                <pages>
+                    <first_page>1</first_page>
+                    <last_page>10</last_page>
+                </pages>
+                <doi_data>
+                    <doi>99.9999</doi>
+                    <resource>https://link_to_paper</resource>
+                </doi_data>
+            </journal_article>
+        </journal>
+    </body>
+</doi_batch>
